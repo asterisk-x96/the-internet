@@ -69,3 +69,4 @@ test('should be toggable via keyboards (Tab and Space)', async ({ page }) => {
     await page.keyboard.press('Space');
     await expect(checkboxesPage.checkbox1).not.toBeChecked();
 })
+
