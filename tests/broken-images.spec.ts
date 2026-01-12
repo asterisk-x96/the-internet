@@ -30,23 +30,16 @@ test.describe('Broken Images', () => {
     })
 
     test('Verify HTTP 404 Status for Broken Images', async ({ page }) => {
-        // We set up the listeners *before* reloading or triggering the images
-        // to ensure we catch the network event.
-        
-        // This promise waits for a response where the URL includes 'asdf.jpg' (known bad image)
         const brokenImage1Promise = page.waitForResponse(response => 
             response.url().includes('asdf.jpg') && response.status() === 404
         );
 
-        // This promise waits for the second known bad image
         const brokenImage2Promise = page.waitForResponse(response => 
             response.url().includes('hjkl.jpg') && response.status() === 404
         );
 
-        // Reload to trigger the network requests again so our listeners catch them
         await page.reload();
 
-        // Await the promises to confirm the events actually happened
         const [response1, response2] = await Promise.all([
             brokenImage1Promise,
             brokenImage2Promise
@@ -64,8 +57,6 @@ test.describe('Broken Images', () => {
         const response = await validImagePromise;
         console.log(`Verified 200 for: ${response.url()}`);
     })
-
-    test ('Verify image source URLs and alt text')
 
     
 })

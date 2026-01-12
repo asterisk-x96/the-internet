@@ -2,7 +2,6 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Broken Images', () => {
     test.beforeEach(async ({ page }) => {
-        // Using the robust wait strategy discussed previously
         await page.goto('/dropdown', { 
             waitUntil: 'commit' 
         });
